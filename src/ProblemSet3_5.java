@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * INSTRUCTIONS.
  * 
@@ -22,6 +24,10 @@ public class ProblemSet3_5 {
 		// test your solutions here
 		
 		ps.primes(1, 1000);
+		ps.leapYears(3);
+		ps.palindromicNumbers(454);
+		ps.fibonacci(22);
+		ps.multiples(2, 3, 10);
 	}
 	
 	/**
@@ -36,9 +42,29 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void primes(int start, int end) {
-		
-	}
-	
+		boolean prime;
+		int primeCount = 0;
+		start = start + 1;
+			for (int i = start; i < end; i++) {
+				prime = true;
+				outerLoop:
+				for(int j = 2; j <=i/2; j++)
+					if(i % j == 0) {
+						prime = false;
+						break outerLoop;
+						}
+				if (prime == true) {
+					primeCount++;
+				}
+			}
+			if(primeCount== 1) {
+				System.out.println("There is " + primeCount + " " + "prime number");
+			}
+			else if(primeCount > 1) {
+				System.out.println("There are " + primeCount + " " + "prime numbers"); 
+			}
+		}
+
 	/**
 	 * What are the next @count leap years?
 	 * 
@@ -49,7 +75,20 @@ public class ProblemSet3_5 {
 	 * @param count
 	 */
 	
+
 	public void leapYears(int count) {
+		int firstLeap = 2020;
+		if (count <= 0) {
+			System.out.println("I Don't know how to compute the next " + count + " leap years...");
+		}
+		
+		else {
+		System.out.print("The next " + count + " leap years are ");
+		for (int i = 0; i < count-1; i++) {
+			System.out.print((firstLeap + i*4) + ", ");
+		}
+		System.out.println("and " + (firstLeap + count*4));
+		}
 		
 	}
 	
@@ -63,7 +102,18 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void palindromicNumbers(int number) {
-		
+		int reversedNumber = 0;
+		int hold = number;
+		while (number != 0) {
+			reversedNumber = reversedNumber*10 + number % 10;
+			number = number / 10;
+		}
+		if (hold == reversedNumber) {
+			System.out.println(hold + " is a palindrome");
+		}
+		else if (hold != reversedNumber) {
+			System.out.println(hold + " is not a palindrome");
+		}
 	}
 	
 	/**
@@ -78,7 +128,31 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void fibonacci(int n) {
-		
+		int startSecond = 1;
+		int sum = 0;
+		int hold = n;
+		int last = n % 10;
+		int startInitial = 0;
+		for (int i = 2; i < hold; i++) {
+			sum = startInitial + startSecond;
+			startInitial = startSecond;
+			startSecond = sum;
+		}
+		if (n == 11 || n == 12 || n == 13 || n == 14 || n == 15 || n == 16 || n == 17 || n == 18 || n == 19 || n % 100 == 0) {
+		System.out.println("The " + n + "th Fibonacci number is " + sum + ".");
+		}
+		else if (last == 1) {
+			System.out.println("The " + n + "st Fibonacci number is " + sum + ".");
+		}
+		else if (last == 2) {
+			System.out.println("The " + n + "nd Fibonacci number is " + sum + ".");
+		}
+		else if (last == 3) {
+			System.out.println("The " + n + "rd Fibonacci number is " + sum + ".");
+		}
+		else {
+			System.out.println("The " + n + "th Fibonacci number is " + sum + ".");
+		}
 	}
 	
 	/**
@@ -91,6 +165,14 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void multiples(int x, int y, int limit) {
+		int sum = 0;
+		for (int i = 0; i <= limit; i++) {
+			if (i % x == 0 || i % y == 0) {
+				sum += i;
+			}
+		}
+		System.out.println("The sum is " + sum + ".");
+		
 		
 	}
 }
